@@ -3,6 +3,10 @@
 let photographersData = [];
 let urlParam = new URL(window.location.href);
 let urlID = urlParam.searchParams.get(`id`);
+let likesTotal = 0;
+const totalLikesContainer = document.querySelector(".total-likes");
+
+
 console.log(urlID);
 
 const mediaList = document.querySelector(".medias-list");
@@ -48,55 +52,56 @@ async function affichageMedias () {
     await getMedias();
     mediasData.forEach((media) => {
         if (media.photographerId == urlID) {
+          likesTotal += media.likes;
 mediaList.innerHTML += 
 `
+<article>
 <img src="assets/medias/${media.photographerId}/${media.image}">
-<p>${media.title}</p>
-<div class="likes-container">
+<p class="media-title">${media.title}</p>
+<div class="likes-container" id="like${media.id}">
 <span class="likes-counter">
 ${media.likes}
 </span>
-<span class="like">
+<span class="like" onClick="clickLike(${media.id})">
     <i class="far fa-heart"></i>
 </span>
-<span class="dislike">
+<span class="dislike" onClick="clickDislike(${media.id})">
     <i class="fas fa-heart"></i>
 </span>
 </div>
+</article>
 `
-
-const like = document.querySelector(".like");
-const dislike = document.querySelector(".dislike");
-const likesCounter = document.querySelector(".likes-counter");
-let likes = media.likes;
-
-function clickLike() {
-  likes = likes + 1;
-  dislike.style.display = "inline-block";
-  like.style.display = "none";
-  likesCounter.textContent = `${likes}`;
-}
-
-function clickDislike() {
-  likes = likes - 1;
-  dislike.style.display = "none";
-  like.style.display = "inline-block";
-  likesCounter.textContent = `${likes}`;
-}
-
-like.addEventListener("click", () => {
-  clickLike();
-});
-
-dislike.addEventListener("click", () => {
-  clickDislike();
-});
         }
     })
+    totalLikesContainer.innerHTML = likesTotal;
 }
 
 affichageMedias();
 
+function clickLike(id) {
+let likeDIV = document.getElementById(`like${id}`)
+let like = likeDIV.querySelector(".like");
+let dislike = likeDIV.querySelector(".dislike");
+let likesCounter = likeDIV.querySelector(".likes-counter");
+let likes = parseInt(likesCounter.textContent);
+likesCounter.textContent = likes+1;
+dislike.style.display = "inline-block";
+like.style.display = "none";
+likesTotal = likesTotal+1;
+totalLikesContainer.innerHTML = likesTotal;
+}
 
+function clickDislike(id) {
+  let likeDIV = document.getElementById(`like${id}`)
+  let like = likeDIV.querySelector(".like");
+  let dislike = likeDIV.querySelector(".dislike");
+  let likesCounter = likeDIV.querySelector(".likes-counter");
+  let likes = parseInt(likesCounter.textContent);
+  likesCounter.textContent = likes-1;
+  dislike.style.display = "none";
+  like.style.display = "inline-block";
+  likesTotal = likesTotal-1;
+  totalLikesContainer.innerHTML = likesTotal;
+  }
 
 

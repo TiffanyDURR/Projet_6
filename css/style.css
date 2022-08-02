@@ -65,8 +65,8 @@ h1 {
 
 .medias-list img {
     object-fit: cover;
-    height: 300px;
-    width: 350px;
+    height: 400px;
+    width: 460px;
 }
 
 .photographer_section p {
@@ -96,8 +96,6 @@ line-height: 12px;
 text-align: center;
 color: #757575;
 }
-
-
 
 
 .photograph-infos {
@@ -152,4 +150,25 @@ color: #757575;
 
 i {
     cursor: pointer;
+}
+
+.medias-list {
+    width: 1720px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.medias-list article {
+    margin-bottom: 30px;
+}
+
+.media-title {
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+color: #911C1C;
 }
