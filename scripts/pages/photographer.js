@@ -1,11 +1,12 @@
 // PHOTOGRAPHER.HTML
 
 let photographersData = [];
+
 let urlParam = new URL(window.location.href);
 let urlID = urlParam.searchParams.get(`id`);
 let likesTotal = 0;
+const tarifPhotograph = document.querySelector(".tarif-photograph");
 const totalLikesContainer = document.querySelector(".total-likes");
-
 
 console.log(urlID);
 
@@ -33,6 +34,10 @@ await fetch ("data/data.json")
         `
         <img src="assets/photographers/${photographer.portrait}" alt="Photo de ${photographer.name}">
         `
+        tarifPhotograph.innerHTML = 
+        `
+        ${photographer.price} $ / jour
+        `
       }
     });
   }
@@ -41,11 +46,15 @@ photographerProfile();
 
 
 let mediasData = [];
+const parPopularite = document.querySelector(".filter01");
+const parTitre = document.querySelector(".filter03");
+const parDate = document.querySelector(".filter02");
 
 async function getMedias () {
     await fetch ("data/data.json")
     .then((res) => res.json())
     .then((data) => (mediasData = data.media))
+    mediasData.sort((a, b) => b.likes - a.likes)
 }
 
 async function affichageMedias () {
@@ -53,10 +62,12 @@ async function affichageMedias () {
     mediasData.forEach((media) => {
         if (media.photographerId == urlID) {
           likesTotal += media.likes;
+          if (media.image) {
 mediaList.innerHTML += 
 `
 <article>
 <img src="assets/medias/${media.photographerId}/${media.image}">
+<div class="medias-footer">
 <p class="media-title">${media.title}</p>
 <div class="likes-container" id="like${media.id}">
 <span class="likes-counter">
@@ -69,11 +80,37 @@ ${media.likes}
     <i class="fas fa-heart"></i>
 </span>
 </div>
-</article>
+</div>
+</article>   
 `
+          }
+          if (media.video) {
+            mediaList.innerHTML += 
+            `
+            <article>
+            <video id=${media.id} poster='assets/medias/${media.photographerId}/${media.title}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video>
+            <div class="medias-footer">
+            <p class="media-title">${media.title}</p>
+            <div class="likes-container" id="like${media.id}">
+            <span class="likes-counter">
+            ${media.likes}
+            </span>
+            <span class="like" onClick="clickLike(${media.id})">
+                <i class="far fa-heart"></i>
+            </span>
+            <span class="dislike" onClick="clickDislike(${media.id})">
+                <i class="fas fa-heart"></i>
+            </span>
+            </div>
+            </div>
+            </article> 
+            `
+          }
         }
     })
-    totalLikesContainer.innerHTML = likesTotal;
+    totalLikesContainer.innerHTML = `
+    ${likesTotal}
+    `;
 }
 
 affichageMedias();
