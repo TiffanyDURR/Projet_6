@@ -66,6 +66,8 @@ await fetch ("data/data.json")
 .then((res) => res.json())
 .then((data) => (mediasData = data.media))
 
+console.log(mediasData.length);
+
 filters.forEach((filter) => {
   filter.addEventListener("click", (e) => {
       console.log(e)
@@ -95,6 +97,8 @@ function affichageMedias () {
 mediasData.forEach((media) => {
 if (media.photographerId == urlID) {
 likesTotal += media.likes;
+
+
 if (media.image) {
 mediaList.innerHTML += 
 `
@@ -114,7 +118,7 @@ mediaList.innerHTML +=
 mediaList.innerHTML += 
 `
 <article>
-  <video id=${media.id} poster='assets/medias/${media.photographerId}/${media.title}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video>
+  <video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.title}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
@@ -161,3 +165,12 @@ totalLikesContainer.innerHTML = likesTotal;
 init();
 
 console.log(mediasData.length);
+
+const filter01 = document.querySelector(".filter01");
+const filterAff = document.querySelector(".filter-aff");
+
+  filter01.addEventListener("click", () => {
+    likesTotal = 0;
+    filterAff.classList.toggle("filter-style-visible");
+  });
+  

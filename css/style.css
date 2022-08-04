@@ -24,6 +24,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    width: 1720px;
 }
 
 h1 {
@@ -134,6 +135,7 @@ color: #757575;
     padding: 30px;
     justify-content: space-between;
     align-items: center;
+    width: 1720px;
 }
 
 
@@ -239,7 +241,6 @@ cursor: pointer;
 }
 
 .filter02, .filter03 {
-    margin-left: 99px;
 background: #911C1C;
 border-top: 1px solid #ffffff;
 width: 170px;
@@ -249,4 +250,21 @@ font-size: 18px;
 color: #FFFFFF;
 border-radius: 5px;
 cursor: pointer;
+display: block;
+text-align: left;
+}
+
+* button {
+border: 0px;
+box-shadow: 0px;
+}
+
+.filter-aff {
+    margin-left: 100px;
+    display: none;
+    position: absolute;
+}
+
+.filter-style-visible {
+    display: block;
 }
