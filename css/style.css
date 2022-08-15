@@ -12,6 +12,10 @@ a {
     text-decoration: none;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
@@ -221,23 +225,9 @@ color: #000000;
     color: #000000;
 }
 
-.filter01 {
-    margin-left: 99px;
-    margin-top: -20px;
-background: #911C1C;
-width: 170px;
-padding: 10px;
-font-weight: 700;
-font-size: 18px;
-color: #FFFFFF;
-display: flex;
-align-items: center;
-border-radius:5px;
-cursor: pointer;
-}
-
-.filter01 i {
+.filters i {
     margin-left: 16px;
+    margin-right: 16px;
 }
 
 .filter02, .filter03 {
@@ -267,4 +257,25 @@ box-shadow: 0px;
 
 .filter-style-visible {
     display: block;
+}
+
+#popularite {
+    margin-right: 20px;
+}
+
+.popfilter {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 99px;
+    margin-top: -20px;
+background: #911C1C;
+width: 170px;
+padding: 10px;
+font-weight: 700;
+font-size: 18px;
+color: #FFFFFF;
+display: flex;
+align-items: center;
+border-radius:5px;
+cursor: pointer;
 }

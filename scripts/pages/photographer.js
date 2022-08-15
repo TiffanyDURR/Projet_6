@@ -49,15 +49,12 @@ async function init () {
   
 function populariteFilter() { 
   mediaList.innerHTML = "";
-  likesTotal = 0;
   mediasData.sort((a, b) => b.likes - a.likes) }
 function dateFilter() { 
   mediaList.innerHTML = "";
-  likesTotal = 0;
   mediasData.sort((a, b) => new Date(a.date) - new Date(b.date)) }
 function titreFilter() { 
   mediaList.innerHTML = "";
-  likesTotal = 0;
   mediasData.sort((a, b) => a.title > b.title) }
 
 
@@ -65,8 +62,6 @@ async function getMedias () {
 await fetch ("data/data.json")
 .then((res) => res.json())
 .then((data) => (mediasData = data.media))
-
-console.log(mediasData.length);
 
 filters.forEach((filter) => {
   filter.addEventListener("click", (e) => {
@@ -94,26 +89,24 @@ filters.forEach((filter) => {
 }
 
 function affichageMedias () {
+  likesTotal = 0;
 mediasData.forEach((media) => {
 if (media.photographerId == urlID) {
 likesTotal += media.likes;
 
-
-
+console.log(likesTotal + " Likes Total")
 
 if (media.image) {
 mediaList.innerHTML += 
 `
 <article>
-
-
   <div class="image"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></div>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <span class="like" onClick="clickLike(${media.id})"><i class="far fa-heart"></i></span>
-      <span class="dislike" onClick="clickDislike(${media.id})"><i class="fas fa-heart"></i></span>
+      <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
+      <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
     </div>
   </div>
 </article>   
@@ -122,23 +115,19 @@ mediaList.innerHTML +=
 mediaList.innerHTML += 
 `
 <article>
-
 <div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.title}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <span class="like" onClick="clickLike(${media.id})"><i class="far fa-heart"></i></span>
-      <span class="dislike" onClick="clickDislike(${media.id})"><i class="fas fa-heart"></i></span>
+      <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
+      <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
     </div>
   </div>
 </article> 
 `
 }
 }
-
-
-
 
 const gallery  = document.querySelectorAll(".image"),
 previewBox = document.querySelector(".preview-box"),
@@ -213,7 +202,7 @@ shadow = document.querySelector(".shadow");
 })
 totalLikesContainer.innerHTML = `${likesTotal}`;
 }
-affichageMedias();
+
 
 function clickLike(id) {
 let likeDIV = document.getElementById(`like${id}`)
@@ -245,10 +234,10 @@ init();
 
 console.log(mediasData.length);
 
-const filter01 = document.querySelector(".filter01");
+const menuderoulant = document.querySelector(".menuderoulant");
 const filterAff = document.querySelector(".filter-aff");
 
-  filter01.addEventListener("click", () => {
+menuderoulant.addEventListener("click", () => {
     likesTotal = 0;
     filterAff.classList.toggle("filter-style-visible");
   });

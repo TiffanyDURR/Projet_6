@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html"><img src="assets/images/logo.png" class="logo" /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -22,8 +22,7 @@
     <section>
       <div class="filters">
         Trier par 
-        <button class="filter filter01" id="popularite">
-          Popularité <i class="fas fa-chevron-down"></i></button>
+          <div class="popfilter"><span class="filter filter01" id="popularite">Popularité</span> <i class="fas fa-chevron-down menuderoulant"></i></div>
         <div class="filter-aff">
         <button class="filter filter02" id="date">Date</button>
         <button class="filter filter03" id="titre">Titre</button>
@@ -34,17 +33,20 @@
         <div class="medias-list">
         </div>
       </div>
+
+      <div class="lightbox-container">
       <div class="preview-box">
         <div class="details">
-          <span class="title">Image <p class="current-img"></p> of <p class="total-img"></p></span>
           <span class="icon fas fa-times"></span>
         </div>
         <div class="image-box">
           <div class="slide prev"><i class="fas fa-angle-left"></i></div>
-          <div class="slide next"><i class="fas fa-angle-right"></i></div>
           <img src="" alt="">
+          <div class="slide next"><i class="fas fa-angle-right"></i></div>
         </div>
+        <span class="title"><span class="current-img"></span> <span class="total-img"></span></span>
       </div>
+    </div>
       <div class="shadow"></div>
     </section>
     <div id="contact_modal">
@@ -53,13 +55,35 @@
           <h2>Contactez-moi</h2>
           <span onclick="closeModal()"><i class="fas fa-times"></i></span>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
+        <form>
+          <h3>Contactez-moi</h3>
+  <h3>Import nom du photographe FETCH</h3>
+  <div class="prenom-container">
+    <label for="prenom">Prenom</label>
+    <input type="text" autocomplete="off" id="prenom">
+    <span></span>
+  </div>
+  
+  <div class="nom-container">
+      <label for="nom">Nom</label>
+      <input type="text" autocomplete="off" id="nom">
+      <span></span>
+    </div>
+  
+    <div class="email-container">
+      <label for="email">E-mail</label>
+      <input type="text" autocomplete="off" id="email">
+      <span>E-mail incorrect !</span>
+    </div>
+      
+    <div class="message-container">
+      <label for="message">Message</label>
+      <textarea id="message"></textarea>
+      <span>Votre message doit faire entre 12 et 300 caractères.</span>
+    </div>
+  
+    <input type="submit" value="Envoyer">
+      </form>
 			</div>
 		</div>
     <footer>
