@@ -21,59 +21,13 @@
     cursor: pointer;
 }
 
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-}
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
-}
+input:active, input:focus, textarea:active, textarea:focus  {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #001C2F;
+  border-radius: 0px;
+  }
 
 
 .lightbox-container i, .icon i {
@@ -115,6 +69,7 @@ form input {
     padding: 40px;
   }
 
+
   .preview-box.show{
     display: block;
   }
@@ -152,4 +107,73 @@ form input {
   z-index: 2;
   display: none;
   background: rgba(255,255,255,0.45);
+}
+
+form {
+  position: fixed;
+  background-color: #DB8876;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 1000;
+  display: block;
+  width: 480px;
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+form label {
+  display: block;
+  width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+}
+
+form input, form textarea {
+  display: block;
+  resize: none;
+  width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #001C2F;
+}
+
+textarea {
+  height: 120px;
+}
+
+.modal-header {
+  width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header i {
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.modal-header h2 {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.form-containers span {
+  width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }

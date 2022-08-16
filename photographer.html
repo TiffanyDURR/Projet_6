@@ -49,15 +49,18 @@
     </div>
       <div class="shadow"></div>
     </section>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <span onclick="closeModal()"><i class="fas fa-times"></i></span>
-        </header>
-        <form>
-          <h3>Contactez-moi</h3>
-  <h3>Import nom du photographe FETCH</h3>
+
+
+        <form id="contact_modal">
+
+            <div class="modal">
+              <div class="modal-header">
+              <h2>Contactez-moi</h2>
+              <span onclick="closeModal()"><i class="fas fa-times"></i></span>
+            </div>
+
+
+              <div class="">
   <div class="prenom-container">
     <label for="prenom">Prenom</label>
     <input type="text" autocomplete="off" id="prenom">
@@ -73,19 +76,20 @@
     <div class="email-container">
       <label for="email">E-mail</label>
       <input type="text" autocomplete="off" id="email">
-      <span>E-mail incorrect !</span>
+      <span></span>
     </div>
       
     <div class="message-container">
       <label for="message">Message</label>
       <textarea id="message"></textarea>
-      <span>Votre message doit faire entre 12 et 300 caractères.</span>
+      <span></span>
     </div>
   
     <input type="submit" value="Envoyer">
+  </div>
+  </div>
       </form>
-			</div>
-		</div>
+
     <footer>
     <div>
 <div class="total-likes"></div> <i class="fas fa-heart"></i>
