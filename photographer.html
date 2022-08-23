@@ -44,7 +44,9 @@
           <img src="" alt="">
           <div class="slide next"><i class="fas fa-angle-right"></i></div>
         </div>
-        <span class="title"><span class="current-img"></span> <span class="total-img"></span></span>
+        <span class="title"><span class="current-img"></span> <span class="total-img"></span>
+      <div class="title-img-ph"></div>
+      </span>
       </div>
     </div>
       <div class="shadow"></div>
@@ -55,12 +57,14 @@
 
             <div class="modal">
               <div class="modal-header">
-              <h2>Contactez-moi</h2>
+              <h2>Contactez-moi
+                <br><span class="name-ph"></span>
+              </h2>
               <span onclick="closeModal()"><i class="fas fa-times"></i></span>
             </div>
 
 
-              <div class="">
+              <div class="form-containers">
   <div class="prenom-container">
     <label for="prenom">Prenom</label>
     <input type="text" autocomplete="off" id="prenom">
@@ -85,7 +89,7 @@
       <span></span>
     </div>
   
-    <input type="submit" value="Envoyer">
+    <input type="submit" class="submit-form" value="Envoyer">
   </div>
   </div>
       </form>

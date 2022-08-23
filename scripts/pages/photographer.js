@@ -30,6 +30,8 @@ photographInfos.innerHTML =
 <p class="card-loc">${photographer.city}, ${photographer.country}</p>
 <p class="card-tagline">${photographer.tagline}</p>
 `
+const namePH = document.querySelector(".name-ph");
+namePH.innerHTML += `${photographer.name}`
 photographPic.innerHTML = `<img src="assets/photographers/${photographer.portrait}" alt="Photo de ${photographer.name}">`
 tarifPhotograph.innerHTML = `${photographer.price} $ / jour`
 }
@@ -100,13 +102,13 @@ if (media.image) {
 mediaList.innerHTML += 
 `
 <article>
-  <div class="image"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></div>
+  <button class="image" data-title="${media.title}"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></button   >
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
-      <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
+      <button class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
+      <button class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
     </div>
   </div>
 </article>   
@@ -123,9 +125,12 @@ mediaList.innerHTML +=
       <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
       <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
     </div>
-  </div>
-</article> 
+  </div>  
+</article>        
 `
+
+
+
 }
 }
 
@@ -146,7 +151,9 @@ shadow = document.querySelector(".shadow");
       gallery[i].onclick = () =>{
           clickedImgIndex = i; //passing cliked image index to created variable (clickedImgIndex)
           function preview(){
-              currentImg.textContent = newIndex + 1; //passing current img index to currentImg varible with adding +1
+              // currentImg.textContent = newIndex + 1; //passing current img index to currentImg varible with adding +1
+              currentImg.textContent = gallery[newIndex].getAttribute("data-title");
+              console.log(gallery)
               let imageURL = gallery[newIndex].querySelector("img").src; //getting user clicked img url
               previewImg.src = imageURL; //passing user clicked img url in previewImg src
           }
@@ -205,16 +212,29 @@ totalLikesContainer.innerHTML = `${likesTotal}`;
 
 
 function clickLike(id) {
+const myMedia = mediasData.find((media) => media.id === id )
+myMedia.likes += 1
 let likeDIV = document.getElementById(`like${id}`)
 let like = likeDIV.querySelector(".like");
 let dislike = likeDIV.querySelector(".dislike");
 let likesCounter = likeDIV.querySelector(".likes-counter");
 let likes = parseInt(likesCounter.textContent);
-likesCounter.textContent = likes+1;
+// likesCounter.textContent = likes+1;
+likesCounter.textContent = myMedia.likes;
 dislike.style.display = "inline-block";
 like.style.display = "none";
 likesTotal = likesTotal+1;
-totalLikesContainer.innerHTML = likesTotal;
+////////////////
+let totalLikes = 0;
+mediasData.forEach((media) => {
+  if (media.photographerId == urlID) {
+    totalLikes += media.likes
+  }
+  
+})
+totalLikesContainer.innerHTML = totalLikes;
+////////////////
+// totalLikesContainer.innerHTML = likesTotal;
 }
 
 function clickDislike(id) {

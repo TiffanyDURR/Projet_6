@@ -177,3 +177,15 @@ textarea {
   margin-right: auto;
   display: block;
 }
+
+button.contact_button:hover {
+background-color:#DB8876;
+}
+
+button.contact_button:focus {
+  background-color:#DB8876;
+  }
+  
+  button.image {
+    background-color: #ffffff;
+  }
