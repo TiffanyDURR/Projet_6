@@ -15,19 +15,19 @@
     <main id="main">
       <div class="photograph-header">
         <div class="photograph-infos"></div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button">Contactez-moi</button>
       <div class="photograph-pic"></div>
       </div>
     </main>
     <section>
       <div class="filters">
         Trier par 
-          <div class="popfilter"><span class="filter filter01" id="popularite">Popularité</span> <i class="fas fa-chevron-down menuderoulant"></i></div>
+          <div class="popfilter"><button class="filter filter01" id="popularite">Popularité</button> <button class="fas fa-chevron-down menuderoulant"></button></div>
         <div class="filter-aff">
         <button class="filter filter02" id="date">Date</button>
         <button class="filter filter03" id="titre">Titre</button>
       </div>
-      </div>
+      </div>    
 
       <div class="wrapper">
         <div class="medias-list">
@@ -60,7 +60,7 @@
               <h2>Contactez-moi
                 <br><span class="name-ph"></span>
               </h2>
-              <span onclick="closeModal()"><i class="fas fa-times"></i></span>
+              <span class="close-modal"><i class="fas fa-times"></i></span>
             </div>
 
 
@@ -100,7 +100,7 @@
   </div>
     <div class="tarif-photograph"></div>
   </footer>
-    <script src="scripts/pages/photographer.js"></script>
-    <script src="scripts/utils/contactForm.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>

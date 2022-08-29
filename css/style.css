@@ -283,3 +283,34 @@ align-items: center;
 border-radius:5px;
 cursor: pointer;
 }
+
+.total-img {
+    display: none;
+}
+
+.current-img {
+    font-size: 24px;
+    color: #901C1C;
+}
+
+.form-containers input:focus, .form-containers textarea:focus  {
+    border: 2px solid #000000; 
+    transition: none;
+}
+
+.submit-form {
+    color: #ffffff;
+    background: #911C1C;
+border-radius: 5px;
+border: 0px;
+display: inline-block;
+margin-left: 60px;
+width: 200px;
+}
+
+button#popularite.filter.filter01, button.fa-chevron-down.menuderoulant {
+ background-color: #901C1C;   
+ font-weight: 700;
+font-size: 18px;
+color: #FFFFFF;
+}

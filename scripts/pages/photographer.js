@@ -1,15 +1,11 @@
 // PHOTOGRAPHER.HTML
 
 let photographersData = [];
-
 let urlParam = new URL(window.location.href);
-let urlID = urlParam.searchParams.get(`id`);
-let likesTotal = 0;
+let urlID = urlParam.searchParams.get(`id`); // console.log(urlID); // Passe à l'URL /photographer.html l'ID du photographe pour générer une nouvelle page
+let likesTotal = 0; // Initialisation du nombre de likes
 const tarifPhotograph = document.querySelector(".tarif-photograph");
 const totalLikesContainer = document.querySelector(".total-likes");
-
-console.log(urlID);
-
 const mediaList = document.querySelector(".medias-list");
 const photographInfos = document.querySelector(".photograph-infos") 
 const photographPic = document.querySelector(".photograph-pic") 
@@ -17,28 +13,24 @@ const photographPic = document.querySelector(".photograph-pic")
 async function getPhotographers () {
 await fetch ("data/data.json")
 .then((res) => res.json())
-.then((data) => (photographersData = data.photographers))
+.then((data) => (photographersData = data.photographers)) // Data contenu dans la partie "Photographers" du fichier JSON
 }
 
-async function photographerProfile() {
+async function photographerProfile() { // Fonction d'affichage du main pour la page photographe 
 await getPhotographers();
 photographersData.forEach((photographer) => {
-if (photographer.id == urlID) {
+if (photographer.id == urlID) { // Condition si l'ID du photographe correspond à l'ID de l'URL alors affiche ;
 photographInfos.innerHTML = 
-`
-<h2>${photographer.name}</h2>
+`<h2>${photographer.name}</h2>
 <p class="card-loc">${photographer.city}, ${photographer.country}</p>
-<p class="card-tagline">${photographer.tagline}</p>
-`
-const namePH = document.querySelector(".name-ph");
+<p class="card-tagline">${photographer.tagline}</p>`
+const namePH = document.querySelector(".name-ph"); // Container du nom du photographe dans le formulaire de contact
 namePH.innerHTML += `${photographer.name}`
-photographPic.innerHTML = `<img src="assets/photographers/${photographer.portrait}" alt="Photo de ${photographer.name}">`
-tarifPhotograph.innerHTML = `${photographer.price} $ / jour`
-}
-});
-}
+photographPic.innerHTML = `<img src="assets/photographers/${photographer.portrait}" alt="Photo de ${photographer.name}">` // Affichage de la photo du photographe
+tarifPhotograph.innerHTML = `${photographer.price} $ / jour` // Affichage du tarif journalier (footer)
+}});}
 
-photographerProfile();
+photographerProfile(); // Joue la fonction 
 
 let mediasData = [];
 const filters = document.querySelectorAll(".filter");
@@ -46,8 +38,7 @@ const filters = document.querySelectorAll(".filter");
 async function init () {
   await getMedias();
   affichageMedias();
-  }
-
+  } // Initialisation de getMedias et AffichageMedias pour leur affichage (async / await)
   
 function populariteFilter() { 
   mediaList.innerHTML = "";
@@ -57,67 +48,55 @@ function dateFilter() {
   mediasData.sort((a, b) => new Date(a.date) - new Date(b.date)) }
 function titreFilter() { 
   mediaList.innerHTML = "";
-  mediasData.sort((a, b) => a.title > b.title) }
-
+  mediasData.sort((a, b) => a.title > b.title) } // Logique pour les 3 filtres
 
 async function getMedias () {
 await fetch ("data/data.json")
 .then((res) => res.json())
-.then((data) => (mediasData = data.media))
+.then((data) => (mediasData = data.media)) // Data contenu dans la partie "Medias" du fichier JSON
 
 filters.forEach((filter) => {
   filter.addEventListener("click", (e) => {
       console.log(e)
-    switch (e.target.id) {
-      case "popularite":
-        populariteFilter();
-        console.log("popularite");
+    switch (e.target.id) { // Récupère la valeur de l'id du bouton sur lequel l'utilisateur a cliqué
+      case "popularite": // Dans le cas ou l'id serait "popularité"
+        populariteFilter(); // Alors trie les medias par popularité
         break;
       case "date":
         dateFilter();
-        console.log("date");
         break;
       case "titre":
         titreFilter();
-        console.log("titre");
         break;
       default:
         null;
     }
     affichageMedias();
-  });
-});
+  });});}
 
-}
-
-function affichageMedias () {
-  likesTotal = 0;
+function affichageMedias () { // Logique d'affichage pour les médias
+  likesTotal = 0; // Initialisation des likes 
 mediasData.forEach((media) => {
 if (media.photographerId == urlID) {
-likesTotal += media.likes;
-
-console.log(likesTotal + " Likes Total")
+likesTotal += media.likes; // Indique que le total des likes est égal au nombre de likes TOTAL des photos du photographe  // console.log(likesTotal + " Likes Total")
 
 if (media.image) {
 mediaList.innerHTML += 
-`
-<article>
+`<article>
   <button class="image" data-title="${media.title}"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></button   >
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <button class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
-      <button class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
+      <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
+      <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
     </div>
   </div>
-</article>   
-`
+</article>   `
 } if (media.video) {
 mediaList.innerHTML += 
-`
-<article>
-<div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.title}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
+`<article>
+<div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
@@ -126,49 +105,41 @@ mediaList.innerHTML +=
       <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
     </div>
   </div>  
-</article>        
-`
+</article>        `
+}}
 
-
-
-}
-}
-
+// Logique d'affichage de la lightbox 
 const gallery  = document.querySelectorAll(".image"),
 previewBox = document.querySelector(".preview-box"),
 previewImg = previewBox.querySelector("img"),
 closeIcon = previewBox.querySelector(".icon"),
 currentImg = previewBox.querySelector(".current-img"),
 totalImg = previewBox.querySelector(".total-img"),
-shadow = document.querySelector(".shadow");
+shadow = document.querySelector(".shadow"); // Container entier de la page 
 
   function affichageLightbox () {
     for (let i = 0; i < gallery.length; i++) {
-      totalImg.textContent = gallery.length; //passing total img length to totalImg variable
-      let newIndex = i; //passing i value to newIndex variable
-      let clickedImgIndex; //creating new variable
+      totalImg.textContent = gallery.length; // Passe la valeur du nombre total d'image à une variable 
+      let newIndex = i; 
+      let clickedImgIndex; // Création d'une nouvelle variable 
       
       gallery[i].onclick = () =>{
-          clickedImgIndex = i; //passing cliked image index to created variable (clickedImgIndex)
+          clickedImgIndex = i; // Passe la valeur de l'index de l'image cliquée à la variable
           function preview(){
-              // currentImg.textContent = newIndex + 1; //passing current img index to currentImg varible with adding +1
-              currentImg.textContent = gallery[newIndex].getAttribute("data-title");
-              console.log(gallery)
-              let imageURL = gallery[newIndex].querySelector("img").src; //getting user clicked img url
-              previewImg.src = imageURL; //passing user clicked img url in previewImg src
+              currentImg.textContent = gallery[newIndex].getAttribute("data-title"); 
+              let imageURL = gallery[newIndex].querySelector("img").src; // Récupère URL de l'image cliquée 
+              previewImg.src = imageURL; // Passe l'url de l'image cliquée à PreviewImg.src
           }
-          preview(); //calling above function
+          preview(); //Appel de la fonction 
   
           const prevBtn = document.querySelector(".prev");
           const nextBtn = document.querySelector(".next");
-          if(newIndex == 0){ //if index value is equal to 0 then hide prevBtn
-              prevBtn.style.display = "none"; 
-          }
-          if(newIndex >= gallery.length - 1){ //if index value is greater and equal to gallery length by -1 then hide nextBtn
-              nextBtn.style.display = "none"; 
-          }
+          if(newIndex == 0){ // Si la valeur de l'index est égale à 0 
+              prevBtn.style.display = "none"; }
+          if(newIndex >= gallery.length - 1){ // Si la valeur de l'index est égale à -1
+              nextBtn.style.display = "none"; }
           prevBtn.onclick = ()=>{ 
-              newIndex--; //decrement index
+              newIndex--; // Decremente l'index
               if(newIndex == 0){
                   preview(); 
                   prevBtn.style.display = "none"; 
@@ -178,7 +149,7 @@ shadow = document.querySelector(".shadow");
               } 
           }
           nextBtn.onclick = ()=>{ 
-              newIndex++; //increment index
+              newIndex++; // Incrémente l'index
               if(newIndex >= gallery.length - 1){
                   preview(); 
                   nextBtn.style.display = "none";
@@ -191,74 +162,49 @@ shadow = document.querySelector(".shadow");
           previewBox.classList.add("show"); 
           shadow.style.display = "block"; 
           closeIcon.onclick = ()=>{
-              newIndex = clickedImgIndex; //assigning user first clicked img index to newIndex
+              newIndex = clickedImgIndex; // Assigne la valeur de l'index de la première image cliquée à NewIndex
               prevBtn.style.display = "block"; 
               nextBtn.style.display = "block";
               previewBox.classList.remove("show");
               shadow.style.display = "none";
               document.querySelector("body").style.overflow = "scroll";
-          }
-      }
-      
-  }
-  }
+          }}}}
 
-  affichageLightbox()
+  affichageLightbox()})
+totalLikesContainer.innerHTML = `${likesTotal}`;}
 
-
-})
-totalLikesContainer.innerHTML = `${likesTotal}`;
-}
-
-
-function clickLike(id) {
-const myMedia = mediasData.find((media) => media.id === id )
-myMedia.likes += 1
-let likeDIV = document.getElementById(`like${id}`)
-let like = likeDIV.querySelector(".like");
-let dislike = likeDIV.querySelector(".dislike");
-let likesCounter = likeDIV.querySelector(".likes-counter");
-let likes = parseInt(likesCounter.textContent);
-// likesCounter.textContent = likes+1;
-likesCounter.textContent = myMedia.likes;
-dislike.style.display = "inline-block";
-like.style.display = "none";
-likesTotal = likesTotal+1;
-////////////////
-let totalLikes = 0;
-mediasData.forEach((media) => {
-  if (media.photographerId == urlID) {
-    totalLikes += media.likes
+function clickLike(id) { // Fonction jouée au click sur le boutton "like" - Récupère le media.id du boutton cliqué
+  let likeDIV = document.getElementById(`like${id}`)
+  let like = likeDIV.querySelector(".like");
+  let dislike = likeDIV.querySelector(".dislike");
+  let likesCounter = likeDIV.querySelector(".likes-counter");
+  let likes = parseInt(likesCounter.textContent); // Renvoie un nombre 
+  likesCounter.textContent = likes+1; // Ajoute 1 au click 
+  dislike.style.display = "inline-block";
+  like.style.display = "none";
+  likesTotal = likesTotal+1; // Ajoute 1 au total des likes 
+  totalLikesContainer.innerHTML = likesTotal;
   }
   
-})
-totalLikesContainer.innerHTML = totalLikes;
-////////////////
-// totalLikesContainer.innerHTML = likesTotal;
-}
-
-function clickDislike(id) {
-let likeDIV = document.getElementById(`like${id}`)
-let like = likeDIV.querySelector(".like");
-let dislike = likeDIV.querySelector(".dislike");
-let likesCounter = likeDIV.querySelector(".likes-counter");
-let likes = parseInt(likesCounter.textContent);
-likesCounter.textContent = likes-1;
-dislike.style.display = "none";
-like.style.display = "inline-block";
-likesTotal = likesTotal-1;
-totalLikesContainer.innerHTML = likesTotal;
-}
-
-init();
-
-console.log(mediasData.length);
+  function clickDislike(id) {
+  let likeDIV = document.getElementById(`like${id}`)
+  let like = likeDIV.querySelector(".like");
+  let dislike = likeDIV.querySelector(".dislike");
+  let likesCounter = likeDIV.querySelector(".likes-counter");
+  let likes = parseInt(likesCounter.textContent);
+  likesCounter.textContent = likes-1;
+  dislike.style.display = "none";
+  like.style.display = "inline-block";
+  likesTotal = likesTotal-1;
+  totalLikesContainer.innerHTML = likesTotal;
+  }
+  init();
+// console.log(mediasData.length);
 
 const menuderoulant = document.querySelector(".menuderoulant");
 const filterAff = document.querySelector(".filter-aff");
 
-menuderoulant.addEventListener("click", () => {
+menuderoulant.addEventListener("click", () => { 
     likesTotal = 0;
     filterAff.classList.toggle("filter-style-visible");
   });
-  

@@ -1,12 +1,16 @@
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
-}
 
-function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
-}
+const closeModal = document.querySelector(".close-modal");
+const modalContainer = document.getElementById("contact_modal");
+
+closeModal.addEventListener("click", () => {
+  modalContainer.style.display = "none";
+})
+
+const displayModal = document.querySelector(".contact_button");
+
+displayModal.addEventListener("click", () => {
+  modalContainer.style.display = "block";
+})
 
 
 const form = document.querySelector("form");
@@ -31,7 +35,7 @@ const errorDisplay = (tag, message, valid) => {
 const prenomChecker = (value) => {
   if (value.length > 0 && (value.length < 3 || value.length > 24)) {
     errorDisplay("prenom", "Votre prenom doit faire entre 3 et 24 caractères");
-    pseudo = null;
+    prenom = null;
   } else if (!value.match(/^[a-zA-Z-]*$/)) {
     errorDisplay(
       "prenom",
@@ -126,3 +130,4 @@ form.addEventListener("submit", (e) => {
     alert("veuillez remplir correctement les champs");
   }
 });
+

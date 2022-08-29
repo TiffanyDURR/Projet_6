@@ -37,3 +37,4 @@ photographersSection.innerHTML = photographersData.map((photographer) =>
 }   
 
 userCardDOM();
+// Appel de la fonction
