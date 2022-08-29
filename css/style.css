@@ -306,6 +306,7 @@ border: 0px;
 display: inline-block;
 margin-left: 60px;
 width: 200px;
+cursor: pointer;
 }
 
 button#popularite.filter.filter01, button.fa-chevron-down.menuderoulant {
@@ -314,3 +315,29 @@ button#popularite.filter.filter01, button.fa-chevron-down.menuderoulant {
 font-size: 18px;
 color: #FFFFFF;
 }
+
+.champ-vide {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    color: #901C1C;
+    font-size: 18px;
+}
+
+.form-containers span {
+    color: #901C1C;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.reponse {
+    font-size: 20px;
+    padding: 60px;
+    text-align: center;
+}
+
+
+.close-modal, .icon {
+    cursor: pointer;
+}
+

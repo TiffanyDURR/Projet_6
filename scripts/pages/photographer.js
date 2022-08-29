@@ -158,6 +158,22 @@ shadow = document.querySelector(".shadow"); // Container entier de la page
                   prevBtn.style.display = "block";
               }
           }
+          document.onkeydown = checkKeySlide;
+function checkKeySlide(e) {
+    e = e || window.event;
+    if (e.keyCode == '37' || e.keyCode == "65") {
+       // left arrow
+       newIndex--; // Decremente l'index
+       preview(); 
+    }
+    else if (e.keyCode == '39' || e.keyCode == "68") {
+       // right arrow
+       newIndex++;
+       preview(); 
+    }
+}
+
+
           document.querySelector("body").style.overflow = "hidden";
           previewBox.classList.add("show"); 
           shadow.style.display = "block"; 
@@ -168,7 +184,31 @@ shadow = document.querySelector(".shadow"); // Container entier de la page
               previewBox.classList.remove("show");
               shadow.style.display = "none";
               document.querySelector("body").style.overflow = "scroll";
-          }}}}
+          }
+
+          function closeLightbox () {
+          closeIcon.onclick = ()=>{
+            newIndex = clickedImgIndex; // Assigne la valeur de l'index de la première image cliquée à NewIndex
+            prevBtn.style.display = "block"; 
+            nextBtn.style.display = "block";
+            previewBox.classList.remove("show");
+            shadow.style.display = "none";
+            document.querySelector("body").style.overflow = "scroll";
+          }
+        }
+        closeLightbox()
+
+document.addEventListener('keydown', function(event){
+if(event.key === "Escape"){
+newIndex = clickedImgIndex; // Assigne la valeur de l'index de la première image cliquée à NewIndex
+prevBtn.style.display = "block"; 
+nextBtn.style.display = "block";
+previewBox.classList.remove("show");
+shadow.style.display = "none";
+document.querySelector("body").style.overflow = "scroll";
+          }
+        });
+        }}}
 
   affichageLightbox()})
 totalLikesContainer.innerHTML = `${likesTotal}`;}

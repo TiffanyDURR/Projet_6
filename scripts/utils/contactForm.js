@@ -1,6 +1,9 @@
 
 const closeModal = document.querySelector(".close-modal");
 const modalContainer = document.getElementById("contact_modal");
+const inscriptionValidee = document.querySelector(".inscription-validee")
+const formContainers = document.querySelector(".form-containers");
+
 
 closeModal.addEventListener("click", () => {
   modalContainer.style.display = "none";
@@ -125,9 +128,18 @@ form.addEventListener("submit", (e) => {
     prenom = null;
     email = null;
     message = null;
-    alert("Inscription validée !");
+    inscriptionValidee.innerHTML = "Message envoyé"
+    formContainers.innerHTML = `<div class="reponse">Le photographe vous répondra dans les plus brefs délais</div>
+   `
   } else {
-    alert("veuillez remplir correctement les champs");
+    alert("Veuillez remplir les champs correctement")
   }
 });
 
+
+document.addEventListener('keydown', function(event){
+  if(event.key === "Escape"){
+    modalContainer.style.display = "none";
+            }
+          });
+          

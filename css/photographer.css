@@ -178,8 +178,8 @@ textarea {
   display: block;
 }
 
-button.contact_button:hover {
-background-color:#DB8876;
+button.contact_button:hover, input.submit-form:hover {
+background-color:#DB8876; 
 }
 
 button.contact_button:focus {
