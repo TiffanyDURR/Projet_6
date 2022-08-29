@@ -96,7 +96,7 @@ mediaList.innerHTML +=
 } if (media.video) {          
 mediaList.innerHTML += 
 `<article>
-<div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
+<div class="image" data-title="${media.title}"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
