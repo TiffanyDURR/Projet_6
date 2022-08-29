@@ -83,7 +83,7 @@ likesTotal += media.likes; // Indique que le total des likes est égal au nombre
 if (media.image) {
 mediaList.innerHTML += 
 `<article>
-  <button class="image" data-title="${media.title}"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></button   >
+  <button aria-label="${media.title}" class="image" data-title="${media.title}"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></button>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">

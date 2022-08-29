@@ -22,13 +22,13 @@ const photographersSection = document.querySelector(".photographer_section");
 photographersSection.innerHTML = photographersData.map((photographer) => 
 // Utilisation de .map, à chaque tour de boucle chaque élément se nomme "photographer"
 `
-<a href="photographer.html?id=${photographer.id}">
+<a href="photographer.html?id=${photographer.id}" aria-label="${photographer.name}">
     <article>
         <img src="assets/photographers/${photographer.portrait}" alt="Photo de ${photographer.name}">
         <h2>${photographer.name}</h2>
         <p class="card-loc">${photographer.city}, ${photographer.country}</p>
         <p class="card-tagline">${photographer.tagline}</p>
-        <p class="card-price">${photographer.price} $ / jour</p>
+        <p class="card-price">${photographer.price} $ par jour</p>
     </article>
 </a>
 `)
