@@ -88,21 +88,21 @@ mediaList.innerHTML +=
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
-      <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
+      <button class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
+      <button class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
     </div>
   </div>
 </article>   `
 } if (media.video) {          
 mediaList.innerHTML += 
 `<article>
-<div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
+<div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <span class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></span>
-      <span class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></span>
+      <button class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
+      <button class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
     </div>
   </div>  
 </article>        `
@@ -254,6 +254,5 @@ const menuderoulant = document.querySelector(".menuderoulant");
 const filterAff = document.querySelector(".filter-aff");
 
 menuderoulant.addEventListener("click", () => { 
-    likesTotal = 0;
     filterAff.classList.toggle("filter-style-visible");
   });

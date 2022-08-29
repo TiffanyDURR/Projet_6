@@ -147,13 +147,21 @@ color: #757575;
     display: none;
 }
 
+
+button.like, button.dislike {
+    background-color: #FFFFFF;
+    padding: 0px;
+    margin: 0px;
+    font-weight: 400;
+font-size: 24px;
+color: #911C1C;
+}
+
 * {
     transition: ease-in-out 0.4s;
 }
 
-
-
-.likes-container       {
+.likes-container     {
     font-weight: 500;
     font-size: 24px;
     line-height: 31px;
@@ -253,6 +261,9 @@ border: 0px;
 box-shadow: 0px;
 }
 
+#popularite {
+    cursor: pointer;
+}
 .filter-aff {
     margin-left: 100px;
     display: none;
@@ -303,7 +314,7 @@ cursor: pointer;
     background: #911C1C;
 border-radius: 5px;
 border: 0px;
-display: inline-block;
+display: inline-block;  
 margin-left: 60px;
 width: 200px;
 cursor: pointer;
@@ -314,6 +325,14 @@ button#popularite.filter.filter01, button.fa-chevron-down.menuderoulant {
  font-weight: 700;
 font-size: 18px;
 color: #FFFFFF;
+}
+
+button.fa-chevron-down.menuderoulant {
+padding-left: 8px;
+padding-right: 8px;
+padding-top: 8px;
+padding-bottom: 8px;
+cursor: pointer;
 }
 
 .champ-vide {
