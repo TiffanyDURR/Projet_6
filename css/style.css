@@ -26,9 +26,8 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: left;
     height: 90px;
-    width: 1720px;
 }
 
 h1 {
@@ -38,7 +37,6 @@ h1 {
 
 .logo {
     height: 50px;
-    margin-left: 100px;
 }
 
 .photographer_section {
@@ -136,17 +134,16 @@ color: #757575;
 
 .photograph-header {
     display: flex;
+    width: 100%;
     padding: 30px;
     justify-content: space-between;
     align-items: center;
-    width: 1720px;
 }
 
 
 .dislike {
     display: none;
 }
-
 
 button.like, button.dislike {
     background-color: #FFFFFF;
@@ -176,7 +173,6 @@ color: #911C1C;
 }
 
 .medias-list {
-    width: 1720px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
@@ -227,72 +223,10 @@ color: #000000;
     display: inline-block;
 }
 
-.filters {
-    width: 1720px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-    font-weight: 700;
-    font-size: 18px;
-    color: #000000;
-}
-
-.filters i {
-    margin-left: 16px;
-    margin-right: 16px;
-}
-
-.filter02, .filter03 {
-background: #911C1C;
-border-top: 1px solid #ffffff;
-width: 170px;
-padding: 10px;
-font-weight: 700;
-font-size: 18px;
-color: #FFFFFF;
-border-radius: 5px;
-cursor: pointer;
-display: block;
-text-align: left;
-}
 
 * button {
 border: 0px;
 box-shadow: 0px;
-}
-
-#popularite {
-    cursor: pointer;
-}
-.filter-aff {
-    margin-left: 100px;
-    display: none;
-    position: absolute;
-}
-
-.filter-style-visible {
-    display: block;
-}
-
-#popularite {
-    margin-right: 20px;
-}
-
-.popfilter {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 99px;
-    margin-top: -20px;
-background: #911C1C;
-width: 170px;
-padding: 10px;
-font-weight: 700;
-font-size: 18px;
-color: #FFFFFF;
-display: flex;
-align-items: center;
-border-radius:5px;
-cursor: pointer;
 }
 
 .total-img {
@@ -320,29 +254,6 @@ width: 200px;
 cursor: pointer;
 }
 
-button#popularite.filter.filter01, button.fa-chevron-down.menuderoulant {
- background-color: #901C1C;   
- font-weight: 700;
-font-size: 18px;
-color: #FFFFFF;
-}
-
-button.fa-chevron-down.menuderoulant {
-padding-left: 8px;
-padding-right: 8px;
-padding-top: 8px;
-padding-bottom: 8px;
-cursor: pointer;
-}
-
-.champ-vide {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 12px;
-    color: #901C1C;
-    font-size: 18px;
-}
-
 .form-containers span {
     color: #901C1C;
     font-size: 14px;
@@ -360,3 +271,78 @@ cursor: pointer;
     cursor: pointer;
 }
 
+video {
+    max-width: 840px;
+    width: 840px;
+    max-height: 600px;
+    height: 600px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  body {
+    width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+  }
+
+  .medias-list button {
+    background-color: #fff;
+  }
+
+  .trierpar {
+    width: 80px;
+  }
+
+  .filters {
+    margin-top: 40px;
+  }
+
+  .filter-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    background-color: #901C1C;
+    width: 140px;
+    color: #ffffff;
+    justify-content: space-between;
+    font-weight: 600;
+font-size: 17px;
+border-radius: 0px;
+border-bottom: 1px solid #ffffff;
+  }
+
+.filters-container {
+display: flex;
+align-items: center;
+}
+
+#parDate, #parTitre {
+    padding: 10px;
+    height: 40px;
+    background-color: #901C1C;
+    width: 140px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 0px;
+    width: 140px;
+    display: block;
+    margin-left: 80px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.filter, .filter-on {
+    cursor: pointer;
+}
+
+
+.filter-off {
+    display: none;
+}
+
+.displayon {
+    display: block;
+}

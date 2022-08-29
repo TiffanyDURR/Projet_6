@@ -20,14 +20,20 @@
       </div>
     </main>
     <section>
-      <div class="filters">
-        Trier par 
-          <div class="popfilter"><button class="filter filter01" id="popularite">Popularité</button> <button class="fas fa-chevron-down menuderoulant"></button></div>
-        <div class="filter-aff">
-        <button class="filter filter02" id="date">Date</button>
-        <button class="filter filter03" id="titre">Titre</button>
-      </div>
-      </div>    
+ 
+
+        <div class="filters">
+          <div class="filters-container">
+          <span class="trierpar">Trier par</span> 
+          <span class="filter-container"><span class="filter" id="parPopularite">Popularité</span><span class="fas fa-chevron-down filter-on"></span></span>
+        </div>
+        <div class="filter-off">
+          <span class="filter" id="parTitre">Titre</span>
+          <span class="filter" id="parDate">Date</span>
+        </div>
+        </div>
+
+
 
       <div class="wrapper">
         <div class="medias-list">
@@ -42,6 +48,7 @@
         <div class="image-box">
           <div class="slide prev"><i class="fas fa-angle-left"></i></div>
           <img src="" alt="">
+
           <div class="slide next"><i class="fas fa-angle-right"></i></div>
         </div>
         <span class="title"><span class="current-img"></span> <span class="total-img"></span>

@@ -40,15 +40,26 @@ async function init () {
   affichageMedias();
   } // Initialisation de getMedias et AffichageMedias pour leur affichage (async / await)
   
+
+
+
+  function titreFilter() { 
+    mediaList.innerHTML = "";
+
+    mediasData.sort( function( a, b ) {
+      a = a.title.toLowerCase();
+      b = b.title.toLowerCase();
+      return a < b ? -1 : a > b ? 1 : 0;
+  });
+}
+
 function populariteFilter() { 
   mediaList.innerHTML = "";
   mediasData.sort((a, b) => b.likes - a.likes) }
 function dateFilter() { 
   mediaList.innerHTML = "";
   mediasData.sort((a, b) => new Date(a.date) - new Date(b.date)) }
-function titreFilter() { 
-  mediaList.innerHTML = "";
-  mediasData.sort((a, b) => a.title > b.title) } // Logique pour les 3 filtres
+ // Logique pour les 3 filtres
 
 async function getMedias () {
 await fetch ("data/data.json")
@@ -59,14 +70,15 @@ filters.forEach((filter) => {
   filter.addEventListener("click", (e) => {
       console.log(e)
     switch (e.target.id) { // Récupère la valeur de l'id du bouton sur lequel l'utilisateur a cliqué
-      case "popularite": // Dans le cas ou l'id serait "popularité"
+      case "parPopularite": // Dans le cas ou l'id serait "popularité"
         populariteFilter(); // Alors trie les medias par popularité
         break;
-      case "date":
+        case "parTitre":
+          titreFilter();
+          console.log(e.target.id)
+          break;
+      case "parDate":
         dateFilter();
-        break;
-      case "titre":
-        titreFilter();
         break;
       default:
         null;
@@ -83,26 +95,26 @@ likesTotal += media.likes; // Indique que le total des likes est égal au nombre
 if (media.image) {
 mediaList.innerHTML += 
 `<article>
-  <button aria-label="${media.title}" class="image" data-title="${media.title}"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></button>
+  <button tabindex="2" aria-label="${media.title}" class="image" data-title="${media.title}"><span>  <img src="assets/medias/${media.photographerId}/${media.image}"></span></button>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <button class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
-      <button class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
+      <button tabindex="3" class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
+      <button tabindex="3" class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
     </div>
   </div>
 </article>   `
 } if (media.video) {          
 mediaList.innerHTML += 
 `<article>
-<div class="image" data-title="${media.title}"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
+<button tabindex="2"><div class="image" data-title="${media.title}"><span><video tabindex="3" id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div></button>
   <div class="medias-footer">
     <p class="media-title">${media.title}</p>
     <div class="likes-container" id="like${media.id}">
       <span class="likes-counter">${media.likes}</span>
-      <button class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
-      <button class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
+      <button tabindex="3" class="like" onClick="clickLike(${media.id})" id="likebutton${media.id}"><i class="far fa-heart"></i></button>
+      <button tabindex="3" class="dislike" onClick="clickDislike(${media.id})" id="dislikebutton${media.id}"><i class="fas fa-heart"></i></button>
     </div>
   </div>  
 </article>        `
@@ -159,29 +171,38 @@ shadow = document.querySelector(".shadow"); // Container entier de la page
               }
           }
           document.onkeydown = checkKeySlide;
+
 function checkKeySlide(e) {
-    e = e || window.event;
-    if (e.keyCode == '37' || e.keyCode == "65") {
-      newIndex--; // Decremente l'index
-      if(newIndex == 0){
-          preview(); 
-          prevBtn.style.display = "none"; 
-      }else{
-          preview();
-          nextBtn.style.display = "block";
-      } 
+  e = e || window.event;
+  if (e.keyCode == '37' || e.keyCode == "65") {
+     // left arrow
+     newIndex--; // Decremente l'index
+     preview(); 
+    newIndex--; // Decremente l'index
+    if(newIndex == 0){
+        preview(); 
+        prevBtn.style.display = "none"; 
+    }else{
+        preview();
+        nextBtn.style.display = "block";
+    } 
+  }
+  else if (e.keyCode == '39' || e.keyCode == "68") {
+     // right arrow
+     newIndex++;
+     preview(); 
+    newIndex++; // Incrémente l'index
+    if(newIndex >= gallery.length - 1){
+        preview(); 
+        nextBtn.style.display = "none";
+    }else{
+        preview(); 
+        prevBtn.style.display = "block";
     }
-    else if (e.keyCode == '39' || e.keyCode == "68") {
-      newIndex++; // Incrémente l'index
-      if(newIndex >= gallery.length - 1){
-          preview(); 
-          nextBtn.style.display = "none";
-      }else{
-          preview(); 
-          prevBtn.style.display = "block";
-      }
-    }
+  }
 }
+
+
 
           document.querySelector("body").style.overflow = "hidden";
           previewBox.classList.add("show"); 
@@ -250,9 +271,10 @@ function clickLike(id) { // Fonction jouée au click sur le boutton "like" - Ré
   init();
 // console.log(mediasData.length);
 
-const menuderoulant = document.querySelector(".menuderoulant");
-const filterAff = document.querySelector(".filter-aff");
+const filterOn = document.querySelector(".filter-on");
+const filterOff = document.querySelector(".filter-off");
 
-menuderoulant.addEventListener("click", () => { 
-    filterAff.classList.toggle("filter-style-visible");
+filterOn.addEventListener("click", () => {
+  filterOff.classList.toggle("displayon");
   });
+  

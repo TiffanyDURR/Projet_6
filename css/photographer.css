@@ -5,7 +5,7 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin: 0px;
 }
 
 .contact_button {
@@ -42,7 +42,7 @@ input:active, input:focus, textarea:active, textarea:focus  {
   justify-content: center;
 }
 
-.image-box img {
+.image-box img, .image-box video {
   max-width: 840px;
   width: 840px;
   max-height: 600px;
