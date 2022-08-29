@@ -93,7 +93,7 @@ mediaList.innerHTML +=
     </div>
   </div>
 </article>   `
-} if (media.video) {
+} if (media.video) {          
 mediaList.innerHTML += 
 `<article>
 <div class="image"><span><video id="${media.id}" poster='assets/medias/${media.photographerId}/${media.video}' src='./assets/medias/${media.photographerId}/${media.video}' type='video/mp4' alt='${media.title}'></video></span></div>
@@ -162,17 +162,26 @@ shadow = document.querySelector(".shadow"); // Container entier de la page
 function checkKeySlide(e) {
     e = e || window.event;
     if (e.keyCode == '37' || e.keyCode == "65") {
-       // left arrow
-       newIndex--; // Decremente l'index
-       preview(); 
+      newIndex--; // Decremente l'index
+      if(newIndex == 0){
+          preview(); 
+          prevBtn.style.display = "none"; 
+      }else{
+          preview();
+          nextBtn.style.display = "block";
+      } 
     }
     else if (e.keyCode == '39' || e.keyCode == "68") {
-       // right arrow
-       newIndex++;
-       preview(); 
+      newIndex++; // Incrémente l'index
+      if(newIndex >= gallery.length - 1){
+          preview(); 
+          nextBtn.style.display = "none";
+      }else{
+          preview(); 
+          prevBtn.style.display = "block";
+      }
     }
 }
-
 
           document.querySelector("body").style.overflow = "hidden";
           previewBox.classList.add("show"); 
